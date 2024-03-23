@@ -1,33 +1,24 @@
-FROM ubuntu:18.04
+FROM python:3.10.6-slim-buster
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
-RUN echo y | apt-get install locales
-RUN echo y | apt install build-essential
-RUN apt -qq install -y --no-install-recommends \
+# Install required dependencies
+RUN apt-get update && apt-get install -y \
     curl \
     git \
-    gnupg2 \
-    wget \
+    python3-pip \
+    ffmpeg
 
-RUN set -ex; \
-    apt-get update \
-    && apt-get install -y --no-install-recommends \
-        busybox \
-	git \
-	python3 \
-	python3-dev \
-	python3-pip \
-	python3-lxml \
-	pv \
-	&& apt-get autoclean \
-        && apt-get autoremove \
-        && rm -rf /var/lib/apt/lists/*
+# Set working directory
+WORKDIR /UPLOADER-BOT-V3
 
-RUN pip3 install setuptools wheel yarl multidict
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
-RUN dpkg-reconfigure locales
-COPY . /app
+# Copy Python dependencies file and install
+COPY requirements.txt /requirements.txt
+RUN pip3 install -r /requirements.txt
 
-CMD ["python3", "bot.py"]
+# Copy start script
+COPY start.sh /start.sh
+
+# Set start script as executable
+RUN chmod +x /start.sh
+
+# Set start script as the entrypoint
+ENTRYPOINT ["/bin/bash", "/start.sh"]
