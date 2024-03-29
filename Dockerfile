@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     ffmpeg
 
 # Set working directory
-WORKDIR /File-Store
+WORKDIR /File-Store-bot
 
 # Copy Python dependencies file and install
 COPY requirements.txt /requirements.txt
