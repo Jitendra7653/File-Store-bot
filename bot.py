@@ -37,6 +37,7 @@ from handlers.save_media import (
     save_media_in_channel,
     save_batch_media_in_channel
 )
+import pyromod
 
 MediaList = {}
 
