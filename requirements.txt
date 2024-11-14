@@ -12,4 +12,7 @@ gunicorn
 Jinja2
 werkzeug
 itsdangerous
-
+pyrofork
+tgcrypto
+flask
+aiohttp
