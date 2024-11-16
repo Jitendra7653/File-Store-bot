@@ -1,5 +1,11 @@
 FROM python:3.10.6-slim-buster
 
+# Install required dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    python3-pip
+
 # Set working directory
 WORKDIR /File-Store-bot
 
