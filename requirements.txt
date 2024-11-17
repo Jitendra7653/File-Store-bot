@@ -1,4 +1,4 @@
-Pyrogram
+pyrogram
 pyromod
 TgCrypto
 motor
